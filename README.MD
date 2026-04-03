@@ -1,5 +1,9 @@
 # 📍 Live GPS Tracking System (Teensy + Node.js + React + Leaflet)
 
+![License: Custom](https://img.shields.io/badge/License-Custom--Non--Commercial-red)
+![Status](https://img.shields.io/badge/Status-Active-green)
+![Stack](https://img.shields.io/badge/Stack-MERN+IoT-blue)
+
 ---
 
 ## 🚀 Project Description
@@ -105,8 +109,6 @@ flowchart TD
 
 ### 📥 Step 1: Raw Data from GPS
 
-The GPS module sends **raw NMEA sentences** to Teensy via UART at **115200 baud rate**:
-
 ```text
 $GNRMC,105202.00,A,2324.50947,N,08731.86070,E,...
 ```
@@ -115,22 +117,15 @@ $GNRMC,105202.00,A,2324.50947,N,08731.86070,E,...
 
 ### 🔄 Step 2: Teensy → Backend
 
-* Teensy forwards this raw NMEA data to the system via USB serial
-* Node.js backend reads this stream using `SerialPort`
+* Teensy forwards raw NMEA data via USB serial
+* Node.js reads using SerialPort
 
 ---
 
 ### 🧩 Step 3: Parsing in `gpsSerial.js`
 
-The backend file **`gpsSerial.js`**:
-
-* Extracts useful fields from NMEA sentences
-* Converts raw format into decimal coordinates
-
-#### Conversion Logic:
-
-* Latitude format: `DDMM.MMMM`
-* Longitude format: `DDDMM.MMMM`
+* Extracts NMEA fields
+* Converts to decimal coordinates
 
 ```js
 decimal = degrees + (minutes / 60)
@@ -149,8 +144,8 @@ Longitude: 87.5310
 
 ### 📤 Step 5: Send to Frontend
 
-* Parsed data is emitted using Socket.io
-* React frontend receives and updates the map
+* Data sent via Socket.io
+* React updates map in real time
 
 ---
 
@@ -160,25 +155,26 @@ Longitude: 87.5310
 Live_Location_Tracker/
 │
 ├── Backend/
-│   ├── server.js        # Express + Socket.io server
-│   └── gpsSerial.js     # Serial handling + GPS parsing
+│   ├── server.js
+│   └── gpsSerial.js
 │
 ├── frontend/
 │   ├── src/
-│   │   ├── MapComponent.jsx   # Main map component
-│   │   ├── main.jsx           # Entry point
+│   │   ├── MapComponent.jsx
+│   │   ├── main.jsx
 │   │   └── App.jsx
 │   │
 │   └── package.json
 │
-└── README.md
+├── README.md
+└── LICENSE
 ```
 
 ---
 
 ## ▶️ Setup & Installation
 
-### 🟢 Backend Setup
+### Backend
 
 ```bash
 cd Backend
@@ -186,9 +182,7 @@ npm install
 npm start
 ```
 
----
-
-### 🟣 Frontend Setup
+### Frontend
 
 ```bash
 cd frontend
@@ -200,29 +194,14 @@ npm run dev
 
 ## ⚠️ Important Configuration
 
-### 🔌 Serial Port
-
 ```js
 path: "/dev/ttyACM0"
 ```
 
-Check available ports:
-
 ```bash
 ls /dev/ttyACM*
-```
-
----
-
-### 🔐 Permission Fix (Linux)
-
-```bash
 sudo chmod 666 /dev/ttyACM0
 ```
-
----
-
-### 🎨 Leaflet CSS (Required)
 
 ```js
 import "leaflet/dist/leaflet.css";
@@ -232,29 +211,23 @@ import "leaflet/dist/leaflet.css";
 
 ## 🧪 Debugging Tips
 
-* Backend logs:
+* Backend:
 
-  * `RAW:` → raw NMEA data
-  * `PARSED:` → converted coordinates
+  * `RAW:` → incoming GPS data
+  * `PARSED:` → processed coordinates
 
-* Frontend logs:
+* Frontend:
 
-  * `Received:` → incoming GPS data
-
-### Common Issues
-
-* ❌ Wrong baud rate
-* ❌ No GPS fix (`V` instead of `A`)
-* ❌ Missing TileLayer → blank map
+  * `Received:` → socket data
 
 ---
 
 ## 🚀 Performance Optimizations
 
-* Noise filtering (ignore ≤ 3 meters)
-* Smooth interpolation (LERP)
+* Noise filtering (≤ 3m)
+* Smooth interpolation
 * Efficient tile loading
-* WebSocket-based real-time updates
+* WebSocket real-time updates
 
 ---
 
@@ -262,7 +235,7 @@ import "leaflet/dist/leaflet.css";
 
 ### 🌐 Wireless Real-Time Tracking (GSM/IoT Upgrade)
 
-In future, this system can be upgraded into a **fully wireless GPS tracking system** by integrating a GSM/4G module (like SIM800, SIM7600, etc.).
+In future, this system can be upgraded into a **fully wireless GPS tracking system** by integrating a GSM/4G module (SIM800, SIM7600, etc.).
 
 ```mermaid
 flowchart TD
@@ -275,42 +248,72 @@ flowchart TD
 
 #### 🚀 Concept:
 
-* GPS data will be transmitted wirelessly via GSM/4G network
-* A **cloud server (AWS / VPS / Render / Railway, etc.)** will host the backend
-* Enables **global real-time tracking from anywhere**
+* Wireless GPS data transmission
+* Cloud-hosted backend
+* Global real-time tracking
 
 #### 💡 Benefits:
 
-* Fully wireless system
-* No USB dependency
-* Scalable for multiple devices
-* Suitable for real-world IoT deployment
+* Fully portable
+* No USB required
+* Scalable IoT system
 
 ---
 
 ## 💡 Use Cases
 
-* 🚗 Vehicle tracking systems
-* 🚁 Drone navigation
-* 📦 Logistics tracking
-* 🤖 Robotics projects
-* 🧭 Personal GPS tracking
+* Vehicle tracking
+* Drone navigation
+* Logistics
+* Robotics
+* Personal tracking
 
 ---
 
 ## 💥 Conclusion
 
-This project demonstrates a **complete real-time GPS tracking system** where:
+✔️ Real-time GPS tracking
+✔️ Smooth UI
+✔️ Scalable architecture
 
-* Raw GPS data (NMEA @115200 baud) is captured
-* Parsed into usable coordinates in the backend
-* Transmitted in real time
-* Visualized smoothly on a web-based map
+Perfect for real-world applications 🚀
 
-✔️ Accurate
-✔️ Real-time
-✔️ Scalable
+---
 
-Perfect for learning and real-world applications 🚀
+## 📜 License
+
+**License: Custom Non-Commercial**
+
+📄 Full License: [View LICENSE](./LICENSE)
+
+This project is licensed under a **Custom Non-Commercial License**.
+
+### ✅ Allowed (Free Use)
+
+* Personal use
+* Educational use
+* Learning and experimentation
+
+### ❌ Not Allowed
+
+* Commercial use without permission
+* Selling or distributing for profit
+
+### 💰 Commercial Use
+
+If you want to use this project for **business or commercial purposes**, you must:
+
+* Contact the author
+* Pay a licensing fee
+* Provide proper credit
+
+### 📧 Contact
+
+For commercial licensing:
+[arahamabeddin7@gmail.com](mailto:arahamabeddin7@gmail.com)
+
+---
+
+⚠️ Unauthorized commercial use is strictly prohibited.
 
 ---
