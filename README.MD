@@ -4,6 +4,12 @@
 ![Status](https://img.shields.io/badge/Status-Active-green)
 ![Stack](https://img.shields.io/badge/Stack-MERN+IoT-blue)
 
+## 🌐 Available Languages
+
+* 🇺🇸 English (default)
+* 🇮🇳 [Hindi](./README.hi.md)
+* 🇧🇩 [Bengali](./README.bn.md)
+
 ---
 
 ## 🚀 Project Description
@@ -11,6 +17,14 @@
 This project is a **real-time GPS tracking system** that integrates hardware and web technologies to display live location data on an interactive map.
 
 The system reads raw GPS data from a hardware module and visualizes it on a web interface with smooth, real-time updates—similar to applications like Google Maps or Uber tracking.
+
+---
+
+## 📸 Live Demo Preview
+
+<p align="center">
+  <img src="./assets/Live_location_update_Image.png" width="800"/>
+</p>
 
 ---
 
@@ -27,6 +41,49 @@ flowchart TD
     F -->|"Leaflet + OSM Tiles"| G["🗺️ Map UI"]
     G -->|"Live Marker Update"| H["📍 User Interface"]
 ```
+
+---
+
+## 🔌 Teensy + GPS Wiring & Code
+
+### 🔗 Wiring (NEO-M8N ↔ Teensy 4.0)
+
+| GPS Module | Teensy 4.0               |
+| ---------- | ------------------------ |
+| VCC        | 3.3V / 5V                |
+| GND        | GND                      |
+| TX         | Pin 0 (RX1)              |
+| RX         | Pin 1 (TX1) *(optional)* |
+
+👉 Basic connection:
+
+* GPS TX → Teensy RX (Pin 0) ✔️
+* GPS RX optional hai
+
+---
+
+### 💻 Teensy Code (UART @115200)
+
+```cpp
+void setup() {
+  Serial.begin(115200);     // PC
+  Serial1.begin(115200);    // GPS is also using 115200
+
+  Serial.println("GPS Data Start...");
+}
+
+void loop() {
+  while (Serial1.available()) {
+    char c = Serial1.read();
+    Serial.print(c);
+  }
+}
+```
+
+👉 Ye code:
+
+* GPS ka raw NMEA data read karta hai
+* USB serial ke through backend ko forward karta hai
 
 ---
 
@@ -166,7 +223,12 @@ Live_Location_Tracker/
 │   │
 │   └── package.json
 │
+├── assets/
+│   └── Live_location_update_Image.png
+│
 ├── README.md
+├── README.hi.md
+├── README.bn.md
 └── LICENSE
 ```
 
