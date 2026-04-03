@@ -1,4 +1,3 @@
-
 # 📍 Live GPS Tracking System (Teensy + Node.js + React + Leaflet)
 
 ---
@@ -261,13 +260,31 @@ import "leaflet/dist/leaflet.css";
 
 ## 🔮 Future Enhancements
 
-* 🛣️ Route history (polyline tracking)
-* 🚗 Speed calculation (km/h)
-* 🧭 Direction / heading indicator
-* 🛰️ Satellite map integration (Mapbox)
-* 📦 Database integration (MongoDB)
-* 📱 Mobile optimization
-* 🔔 Alerts & geofencing
+### 🌐 Wireless Real-Time Tracking (GSM/IoT Upgrade)
+
+In future, this system can be upgraded into a **fully wireless GPS tracking system** by integrating a GSM/4G module (like SIM800, SIM7600, etc.).
+
+```mermaid
+flowchart TD
+    A["🛰️ GPS Module"] --> B["⚡ Microcontroller"]
+    B --> C["📶 GSM/4G Module"]
+    C -->|"Cellular Network"| D["🌍 Internet"]
+    D -->|"Cloud API"| E["☁️ Cloud Server"]
+    E -->|"Real-time Data"| F["🌐 Web App"]
+```
+
+#### 🚀 Concept:
+
+* GPS data will be transmitted wirelessly via GSM/4G network
+* A **cloud server (AWS / VPS / Render / Railway, etc.)** will host the backend
+* Enables **global real-time tracking from anywhere**
+
+#### 💡 Benefits:
+
+* Fully wireless system
+* No USB dependency
+* Scalable for multiple devices
+* Suitable for real-world IoT deployment
 
 ---
 
