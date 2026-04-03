@@ -1,3 +1,4 @@
+
 # 📍 Live GPS Tracking System (Teensy + Node.js + React + Leaflet)
 
 ---
@@ -14,20 +15,14 @@ The system reads raw GPS data from a hardware module and visualizes it on a web 
 
 ```mermaid
 flowchart TD
-    A[🛰️ GPS Module (NEO-M8N)]
-    -->|UART (NMEA Raw @115200 baud)| B[⚡ Teensy 4.0]
-
-    B -->|USB Serial| C[🖥️ Node.js Backend]
-
-    C -->|SerialPort Read| D[gpsSerial.js<br/>📥 Parse NMEA]
-
-    D -->|Convert → Decimal<br/>(Lat, Lon)| E[📡 Socket.io]
-
-    E -->|WebSocket Events| F[🌐 React Frontend]
-
-    F -->|Leaflet + OSM Tiles| G[🗺️ Map UI]
-
-    G -->|Live Marker Update| H[📍 User Interface]
+    A["🛰️ GPS Module (NEO-M8N)"]
+    A -->|"UART (NMEA Raw @115200 baud)"| B["⚡ Teensy 4.0"]
+    B -->|"USB Serial"| C["🖥️ Node.js Backend"]
+    C -->|"SerialPort Read"| D["📥 gpsSerial.js - Parse NMEA"]
+    D -->|"Convert → Decimal (Lat, Lon)"| E["📡 Socket.io"]
+    E -->|"WebSocket Events"| F["🌐 React Frontend"]
+    F -->|"Leaflet + OSM Tiles"| G["🗺️ Map UI"]
+    G -->|"Live Marker Update"| H["📍 User Interface"]
 ```
 
 ---
